@@ -1,5 +1,5 @@
 {
-  "name": "proyecto",
+  "name": "calendar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,8 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "clean": "rm -rf dist_electron"
   },
   "main": "background.js",
   "dependencies": {
