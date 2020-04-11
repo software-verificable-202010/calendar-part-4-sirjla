@@ -16,7 +16,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
-import { HeaderData } from "../types/Calendar";
+import { HeaderData } from "@/types/Calendar";
 import Date from "./Date.vue";
 
 @Component({

@@ -1,8 +1,6 @@
 interface HeaderData {
   displayName: string;
-  headerClassName: string
+  headerClassName: string;
 }
 
-export {
-  HeaderData
-};
+export { HeaderData };

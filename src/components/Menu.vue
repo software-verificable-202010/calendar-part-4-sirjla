@@ -23,7 +23,10 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
-import { selectMonthAction, selectYearAction } from "../store/ActionNames";
+import {
+  selectMonthMutation,
+  selectYearMutation
+} from "../store/MutationNames";
 
 @Component
 export default class Menu extends Vue {
@@ -36,14 +39,14 @@ export default class Menu extends Vue {
     return this.$store.state.selectedMonth;
   }
   private set selectedMonth(value: number) {
-    this.$store.dispatch(selectMonthAction, value);
+    this.$store.commit(selectMonthMutation, value);
   }
 
   private get selectedYear(): number {
     return this.$store.state.selectedYear;
   }
   private set selectedYear(value: number) {
-    this.$store.dispatch(selectYearAction, value);
+    this.$store.commit(selectYearMutation, value);
   }
 }
 </script>

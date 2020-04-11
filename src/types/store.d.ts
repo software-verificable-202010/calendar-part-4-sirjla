@@ -6,6 +6,4 @@ interface RootState {
   currentDate: moment.Moment;
 }
 
-export {
-  RootState
-}
+export { RootState };
