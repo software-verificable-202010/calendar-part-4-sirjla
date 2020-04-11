@@ -2,6 +2,8 @@
 
 ## Description
 
+### Author: Jose Luis Assadi
+
 This project is a calendar.
 
 ## Project setup
