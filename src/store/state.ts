@@ -1,9 +1,10 @@
 import moment from "moment";
-import { calendarView } from "@/common/constants.ts";
+import { monthView } from "@/common/constants.ts";
 
 export const state = {
   selectedYear: moment().year(),
   selectedMonth: moment().month(),
+  selectedWeek: moment().isoWeek(),
   currentDate: moment(),
-  currentView: calendarView
+  currentView: monthView
 };

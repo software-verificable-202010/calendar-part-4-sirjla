@@ -1,4 +1,4 @@
-const calendarView = "Calendar";
+const monthView = "Calendar";
 const weekView = "View";
 
-export { calendarView, weekView };
+export { monthView, weekView };

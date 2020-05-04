@@ -9,7 +9,8 @@
         {{ weekdayColumn.displayName }}
       </div>
     </div>
-    <Month v-if="showView(calendarView)" class="calendar-display" />
+    <Month v-if="showView(monthView)" class="calendar-display" />
+    <Week v-if="showView(weekView)" class="calendar-display" />
   </div>
 </template>
 
@@ -18,15 +19,17 @@ import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
 import { HeaderData } from "@/types/Calendar";
 import Month from "@/components/Month.vue";
-import { calendarView, weekView } from "@/common/constants.ts";
+import Week from "@/components/Week.vue";
+import { monthView, weekView } from "@/common/constants.ts";
 
 @Component({
   components: {
-    Month
+    Month,
+    Week
   }
 })
 export default class Calendar extends Vue {
-  private calendarView: string = calendarView;
+  private monthView: string = monthView;
   private weekView: string = weekView;
 
   private showView(view: string): boolean {
@@ -52,7 +55,6 @@ export default class Calendar extends Vue {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 24fr;
   column-gap: 1%;
-  row-gap: 1%;
   justify-items: center;
   align-items: center;
   border-color: $tertiary-color;

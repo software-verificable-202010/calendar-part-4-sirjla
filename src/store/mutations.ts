@@ -11,5 +11,8 @@ export const mutations = {
   },
   changeView(state: RootState, view: string) {
     state.currentView = view;
+  },
+  changeWeek(state: RootState, weekdifferential: number) {
+    state.selectedWeek += weekdifferential;
   }
 };
