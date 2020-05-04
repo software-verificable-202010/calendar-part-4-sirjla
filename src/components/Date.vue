@@ -25,11 +25,13 @@ export default class Date extends Vue {
   // Component inherited properties
   @Prop() private date!: moment.Moment;
 
-  // Component properties
-  private dateNumber: number = this.date.date();
-  private isoWeekDay: number = this.date.isoWeekday();
-
   // Component computed properties
+  private get dateNumber(): number {
+    return this.date.date();
+  }
+  private get isoWeekDay(): number {
+    return this.date.isoWeekday();
+  }
   private get dateClass(): string[] {
     return [
       `date-${this.isoWeekNumberToOrder()}${this.weekDayName}`,
@@ -49,14 +51,19 @@ export default class Date extends Vue {
   }
   private get isWeekend(): boolean {
     const isoWeekendDays: number[] = [6, 7];
-    return isoWeekendDays.includes(this.isoWeekDay);
+    return isoWeekendDays.includes(this.date.isoWeekday());
   }
   private get weekDayName(): string {
     return this.date.format(momentJsWeekdayNameFormatter);
   }
   private isoWeekNumberToOrder(): string {
-    const isoWeekdayNumberDifference =
-      this.date.isoWeek() - this.startingWeekNumber;
+    let isoWeekdayNumberDifference: number;
+    // Fix this magic number
+    isoWeekdayNumberDifference = this.date.isoWeek() - this.startingWeekNumber;
+    if (isoWeekdayNumberDifference < 0) {
+      isoWeekdayNumberDifference =
+        isoWeekdayNumberDifference + this.date.isoWeeksInYear();
+    }
     if (weekdayOrders.length > isoWeekdayNumberDifference) {
       return weekdayOrders[isoWeekdayNumberDifference];
     }
