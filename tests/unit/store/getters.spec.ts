@@ -3,6 +3,7 @@ import { getters } from "@/store/getters";
 import moment from "moment";
 import MockDate from "mockdate";
 import { RootState } from "@/types/store";
+import { calendarView } from "@/common/constants.ts";
 
 describe("Store Getters", () => {
   const originalMonth = 3;
@@ -16,7 +17,8 @@ describe("Store Getters", () => {
     state = {
       selectedYear: originalYear,
       selectedMonth: originalMonth,
-      currentDate: moment()
+      currentDate: moment(),
+      currentView: calendarView
     };
   });
 

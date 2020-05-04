@@ -9,7 +9,7 @@
         {{ weekdayColumn.displayName }}
       </div>
     </div>
-    <Date v-for="(date, index) in calendarDates" :key="index" :date="date" />
+    <Month v-if="showView(calendarView)" class="calendar-display" />
   </div>
 </template>
 
@@ -17,38 +17,21 @@
 import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
 import { HeaderData } from "@/types/Calendar";
-import Date from "./Date.vue";
+import Month from "@/components/Month.vue";
+import { calendarView, weekView } from "@/common/constants.ts";
 
 @Component({
   components: {
-    Date
+    Month
   }
 })
 export default class Calendar extends Vue {
-  // Store getters and setter
-  private get selectedMonth(): number {
-    return this.$store.state.selectedMonth;
-  }
-  private get selectedYear(): number {
-    return this.$store.state.selectedYear;
-  }
+  private calendarView: string = calendarView;
+  private weekView: string = weekView;
 
-  // Computed methods
-  private get calendarDates(): moment.Moment[] {
-    const baseMoment: moment.Moment = moment().set({
-      year: this.selectedYear,
-      month: this.selectedMonth
-    });
-    return [...Array(baseMoment.daysInMonth()).keys()]
-      .map((dateNumber: number): number => ++dateNumber)
-      .map(
-        (dateNumber: number): moment.Moment =>
-          baseMoment.clone().set({
-            date: dateNumber
-          })
-      );
+  private showView(view: string): boolean {
+    return this.$store.state.currentView === view;
   }
-
   private get weekdayHeaderData(): HeaderData[] {
     return moment.weekdays().map(
       (weekdayName: string): HeaderData => ({
@@ -67,7 +50,7 @@ export default class Calendar extends Vue {
   width: 98%;
   height: 97%;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 4fr 4fr 4fr 4fr 4fr 4fr;
+  grid-template-rows: 1fr 24fr;
   column-gap: 1%;
   row-gap: 1%;
   justify-items: center;
@@ -77,12 +60,12 @@ export default class Calendar extends Vue {
   border-style: solid;
   grid-template-areas:
     "header header header header header header header"
-    "firstMonday firstTuesday firstWednesday firstThursday firstFriday firstSaturday firstSunday"
-    "secondMonday secondTuesday secondWednesday secondThursday secondFriday secondSaturday secondSunday"
-    "thirdMonday thirdTuesday thirdWednesday thirdThursday thirdFriday thirdSaturday thirdSunday"
-    "fourthMonday fourthTuesday fourthWednesday fourthThursday fourthFriday fourthSaturday fourthSunday"
-    "fifthMonday fifthTuesday fifthWednesday fifthThursday fifthFriday fifthSaturday fifthSunday"
-    "sixthMonday sixthTuesday sixthWednesday sixthThursday sixthFriday sixthSaturday sixthSunday";
+    "data data data data data data data";
+}
+.calendar-display {
+  grid-area: data;
+  width: 100%;
+  height: 100%;
 }
 .calendar-header {
   grid-area: header;

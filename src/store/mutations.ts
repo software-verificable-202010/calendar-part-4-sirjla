@@ -8,5 +8,8 @@ export const mutations = {
   },
   selectYear(state: RootState, year: number) {
     state.selectedYear = year;
+  },
+  changeView(state: RootState, view: string) {
+    state.currentView = view;
   }
 };

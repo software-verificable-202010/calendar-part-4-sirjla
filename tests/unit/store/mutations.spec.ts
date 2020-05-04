@@ -2,6 +2,7 @@ import { expect } from "chai";
 import { mutations } from "@/store/mutations";
 import { RootState } from "@/types/store";
 import moment from "moment";
+import { calendarView } from "@/common/constants.ts";
 
 const { selectMonth, selectYear } = mutations;
 
@@ -15,7 +16,8 @@ describe("Store Mutations", () => {
     state = {
       selectedYear: originalYear,
       selectedMonth: originalMonth,
-      currentDate: moment()
+      currentDate: moment(),
+      currentView: calendarView
     };
   });
 

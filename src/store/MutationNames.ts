@@ -1,4 +1,5 @@
 const selectMonthMutation = "selectMonth";
 const selectYearMutation = "selectYear";
+const changeViewMutation = "changeView";
 
-export { selectMonthMutation, selectYearMutation };
+export { selectMonthMutation, selectYearMutation, changeViewMutation };

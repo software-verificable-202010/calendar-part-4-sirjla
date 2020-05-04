@@ -17,6 +17,8 @@
         >{{ month }}</option
       >
     </select>
+    <button v-on:click="setCalendarView(calendarView)">Monthly View</button>
+    <button v-on:click="setCalendarView(weekView)">Weekly View</button>
   </div>
 </template>
 
@@ -25,8 +27,10 @@ import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
 import {
   selectMonthMutation,
-  selectYearMutation
+  selectYearMutation,
+  changeViewMutation
 } from "../store/MutationNames";
+import { calendarView, weekView } from "@/common/constants.ts";
 
 @Component
 export default class Menu extends Vue {
@@ -34,10 +38,14 @@ export default class Menu extends Vue {
   monthNames: string[] = moment.months();
   listOfYears: number[] = [...Array(3000).keys()].reverse();
 
+  private calendarView: string = calendarView;
+  private weekView: string = weekView;
+
   // Store getters and setters
   private get selectedMonth(): number {
     return this.$store.state.selectedMonth;
   }
+
   private set selectedMonth(value: number) {
     this.$store.commit(selectMonthMutation, value);
   }
@@ -45,8 +53,13 @@ export default class Menu extends Vue {
   private get selectedYear(): number {
     return this.$store.state.selectedYear;
   }
+
   private set selectedYear(value: number) {
     this.$store.commit(selectYearMutation, value);
+  }
+
+  private setCalendarView(view: string) {
+    this.$store.commit(changeViewMutation, view);
   }
 }
 </script>

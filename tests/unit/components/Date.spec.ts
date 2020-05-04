@@ -7,6 +7,7 @@ import moment from "moment";
 import { mutations } from "@/store/mutations";
 import { getters } from "@/store/getters";
 import { RootState } from "@/types/store";
+import { calendarView } from "@/common/constants.ts";
 
 const mockDateTime = "2020-04-01T12:00:00.000";
 
@@ -22,7 +23,8 @@ describe("Calendar.vue", () => {
     state = {
       selectedYear: moment().year(),
       selectedMonth: moment().month(),
-      currentDate: moment()
+      currentDate: moment(),
+      currentView: calendarView
     };
     store = new Vuex.Store<RootState>({
       state,
