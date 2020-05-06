@@ -28,7 +28,6 @@ import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
 import ScheduleHour from "@/components/ScheduleHour.vue";
 import { Appointment } from "@/types/Appointment";
-import { getCalendarDates } from "@/common/methods";
 
 const momentJsWeekdayNameFormatter = "dddd";
 
@@ -54,9 +53,17 @@ export default class Week extends Vue {
 
   private get calendarDates(): moment.Moment[] {
     const baseMoment: moment.Moment = moment().set({
-      isoWeek: this.getSelectedWeek
+      isoWeek: this.getSelectedWeek,
+      day: 1
     });
-    return getCalendarDates(baseMoment, this.daysInWeek);
+    return [...Array(this.daysInWeek).keys()]
+      .map((dateNumber: number): number => +dateNumber)
+      .map(
+        (dateNumber: number): moment.Moment =>
+          baseMoment.clone().set({
+            date: baseMoment.date() + dateNumber
+          })
+      );
   }
 
   private appointments(date: moment.Moment): Appointment[] {

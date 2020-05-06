@@ -25,7 +25,9 @@ describe("Calendar.vue", () => {
       selectedMonth: moment().month(),
       selectedWeek: moment().isoWeek(),
       currentDate: moment(),
-      currentView: monthView
+      currentView: monthView,
+      showAppointment: false,
+      appointments: []
     };
     store = new Vuex.Store<RootState>({
       state,

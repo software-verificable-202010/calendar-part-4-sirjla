@@ -19,7 +19,9 @@ describe("Store Getters", () => {
       selectedMonth: originalMonth,
       selectedWeek: moment().isoWeek(),
       currentDate: moment(),
-      currentView: monthView
+      currentView: monthView,
+      showAppointment: false,
+      appointments: []
     };
   });
 
