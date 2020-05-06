@@ -4,6 +4,7 @@ const changeViewMutation = "changeView";
 const changeWeekMutation = "changeWeek";
 const changeShowAppointmentMutation = "changeShowAppointment";
 const insertAppointmentMutation = "insertAppointment";
+const loadAppoinmentsMutation = "loadAppoinments"
 
 export {
   selectMonthMutation,
@@ -11,5 +12,6 @@ export {
   changeViewMutation,
   changeWeekMutation,
   changeShowAppointmentMutation,
-  insertAppointmentMutation
+  insertAppointmentMutation,
+  loadAppoinmentsMutation
 };

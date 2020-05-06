@@ -11,6 +11,7 @@ const monthNames: string[] = moment.months();
 const closeEvent = "close";
 const dateComparisonGranularity = "day";
 const momentJsWeekdayNameFormatter = "dddd";
+const appointmentDB = "appointments";
 
 export {
   monthView,
@@ -22,5 +23,6 @@ export {
   monthNames,
   closeEvent,
   dateComparisonGranularity,
-  momentJsWeekdayNameFormatter
+  momentJsWeekdayNameFormatter,
+  appointmentDB
 };

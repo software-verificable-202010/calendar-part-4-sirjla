@@ -11,7 +11,14 @@ import { Component, Vue } from "vue-property-decorator";
 import Calendar from "@/components/Calendar.vue";
 import Menu from "@/components/Menu.vue";
 import AppointmentManager from "@/components/AppointmentManager.vue";
-import { changeShowAppointmentMutation } from "@/store/MutationNames";
+import {
+  changeShowAppointmentMutation,
+  loadAppoinmentsMutation
+} from "@/store/MutationNames";
+import storage from "electron-json-storage";
+import { Appointment } from "@/types/Appointment";
+import moment from "moment";
+import { appointmentDB } from "@/common/constants";
 
 @Component({
   components: {
@@ -21,6 +28,25 @@ import { changeShowAppointmentMutation } from "@/store/MutationNames";
   }
 })
 export default class App extends Vue {
+  private loadAppointments(): void {
+    storage.get(appointmentDB, (error, data) => {
+      if (error) throw error;
+      if (data !== {}) {
+        this.$store.commit(
+          loadAppoinmentsMutation,
+          JSON.parse(JSON.stringify(data)).map((appointment: Appointment) => {
+            appointment.date = moment(appointment.date);
+            return appointment;
+          })
+        );
+      }
+    });
+  }
+
+  mounted() {
+    this.loadAppointments();
+  }
+
   private get showAppointment(): boolean {
     return this.$store.state.showAppointment;
   }

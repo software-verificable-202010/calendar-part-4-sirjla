@@ -1,6 +1,7 @@
 import { RootState } from "@/types/store";
 import { Appointment } from "@/types/Appointment";
-import { stat } from 'fs';
+import storage from 'electron-json-storage';
+import { appointmentDB } from "@/common/constants";
 
 const monthNumberUpperLimit = 12;
 
@@ -22,5 +23,12 @@ export const mutations = {
   },
   insertAppointment(state: RootState, appointment: Appointment) {
     state.appointments.push(appointment);
+
+    storage.set(appointmentDB, state.appointments, function(error) {
+      if (error) throw error;
+    });
+  },
+  loadAppoinments(state: RootState, appointments: Appointment[]) {
+    state.appointments = appointments;
   }
 };
