@@ -21,6 +21,7 @@
     <button v-on:click="setView(weekView)">Weekly View</button>
     <button v-on:click="changeWeek(-1)">Prev Week</button>
     <button v-on:click="changeWeek(1)">Next Week</button>
+    <button v-on:click="showAppointment()">Create Appointment</button>
   </div>
 </template>
 
@@ -31,7 +32,8 @@ import {
   selectMonthMutation,
   selectYearMutation,
   changeViewMutation,
-  changeWeekMutation
+  changeWeekMutation,
+  changeShowAppointmentMutation
 } from "../store/MutationNames";
 import { monthView, weekView } from "@/common/constants.ts";
 
@@ -67,6 +69,10 @@ export default class Menu extends Vue {
 
   private changeWeek(differential: number) {
     this.$store.commit(changeWeekMutation, differential);
+  }
+
+  private showAppointment(): void {
+    this.$store.commit(changeShowAppointmentMutation, true);
   }
 }
 </script>

@@ -6,5 +6,7 @@ export const state = {
   selectedMonth: moment().month(),
   selectedWeek: moment().isoWeek(),
   currentDate: moment(),
-  currentView: monthView
+  currentView: monthView,
+  showAppointment: false,
+  appointments: []
 };

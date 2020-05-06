@@ -1,20 +1,23 @@
 <template>
   <div :class="dateClass">
-    <svg viewBox="0 0 50 50" class="date-number">
-      <text :x="dateTextHorizontalAlignment" y="30">{{ dateNumber }}</text>
-    </svg>
+    {{ dateNumber }}
+    <li
+      class="appointment"
+      v-for="(appointment, index) in appointments"
+      :key="index"
+    >
+      {{ appointment.title }}
+    </li>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import moment from "moment";
+import { Appointment } from "@/types/Appointment";
 
 const emptyClass = "";
 const weekendClass = "date-weekend";
-const baseAlignment = 15.5;
-const singleDigitAlignmentOffset = 5;
-const singleDigitMaxNumber = 9;
 const dateComparisonGranularity = "day";
 const currentDateClass = "date-current";
 const momentJsWeekdayNameFormatter = "dddd";
@@ -39,11 +42,9 @@ export default class Date extends Vue {
       this.isCurrentDate ? currentDateClass : emptyClass
     ];
   }
-  private get dateTextHorizontalAlignment(): number {
-    if (this.dateNumber <= singleDigitMaxNumber) {
-      return baseAlignment + singleDigitAlignmentOffset;
-    }
-    return baseAlignment;
+
+  private get appointments(): Appointment[] {
+    return this.$store.getters.getDateAppointments(this.date);
   }
 
   private get startingWeekNumber(): number {
@@ -114,5 +115,8 @@ export default class Date extends Vue {
     border-style: solid;
     fill: $highlight-color;
   }
+}
+.appointment {
+  font-size: 0.6em;
 }
 </style>

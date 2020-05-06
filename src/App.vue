@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <AppointmentManager v-if="showAppointment" @close="hideAppointment()" />
     <Calendar id="calendar" />
     <Menu id="menu" />
   </div>
@@ -7,16 +8,27 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Calendar from "./components/Calendar.vue";
-import Menu from "./components/Menu.vue";
+import Calendar from "@/components/Calendar.vue";
+import Menu from "@/components/Menu.vue";
+import AppointmentManager from "@/components/AppointmentManager.vue";
+import { changeShowAppointmentMutation } from "@/store/MutationNames";
 
 @Component({
   components: {
     Calendar,
-    Menu
+    Menu,
+    AppointmentManager
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private get showAppointment(): boolean {
+    return this.$store.state.showAppointment;
+  }
+
+  private hideAppointment(): void {
+    this.$store.commit(changeShowAppointmentMutation, false);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Appointment } from "@/types/Appointment"
 
 interface RootState {
   selectedYear: number;
@@ -6,6 +7,8 @@ interface RootState {
   selectedWeek: number;
   currentDate: moment.Moment;
   currentView: string;
+  showAppointment: boolean;
+  appointments: Appointment[];
 }
 
 export { RootState };
