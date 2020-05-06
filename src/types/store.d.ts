@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Appointment } from "@/types/Appointment"
+import { Appointment } from "@/types/Appointment";
 
 interface RootState {
   selectedYear: number;

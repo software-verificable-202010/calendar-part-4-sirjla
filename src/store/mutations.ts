@@ -1,6 +1,6 @@
 import { RootState } from "@/types/store";
 import { Appointment } from "@/types/Appointment";
-import storage from 'electron-json-storage';
+import storage from "electron-json-storage";
 import { appointmentDB } from "@/common/constants";
 
 const monthNumberUpperLimit = 12;

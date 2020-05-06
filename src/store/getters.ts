@@ -5,7 +5,6 @@ import { Appointment } from "@/types/Appointment";
 const startingDayOfMonth = 1;
 const dateComparisonGranularity = "day";
 
-
 export const getters = {
   selecteddMonthStartingWeekNumber: (state: RootState): number => {
     return moment()
@@ -16,7 +15,9 @@ export const getters = {
       })
       .isoWeek();
   },
-  getDateAppointments: (state: RootState) => (date: moment.Moment): Appointment[] => {
+  getDateAppointments: (state: RootState) => (
+    date: moment.Moment
+  ): Appointment[] => {
     return state.appointments.filter((appointment: Appointment) =>
       appointment.date.isSame(date, dateComparisonGranularity)
     );

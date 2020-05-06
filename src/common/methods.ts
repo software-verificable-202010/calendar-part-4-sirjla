@@ -1,6 +1,9 @@
 import moment from "moment";
 
-function getCalendarDates(baseMoment: moment.Moment, numberOfDays: number): moment.Moment[] {
+function getCalendarDates(
+  baseMoment: moment.Moment,
+  numberOfDays: number
+): moment.Moment[] {
   return [...Array(numberOfDays).keys()]
     .map((dateNumber: number): number => ++dateNumber)
     .map(
@@ -11,6 +14,4 @@ function getCalendarDates(baseMoment: moment.Moment, numberOfDays: number): mome
     );
 }
 
-export {
-  getCalendarDates
-}
+export { getCalendarDates };
