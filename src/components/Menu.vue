@@ -27,7 +27,6 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import moment from "moment";
 import {
   selectMonthMutation,
   selectYearMutation,
@@ -35,13 +34,18 @@ import {
   changeWeekMutation,
   changeShowAppointmentMutation
 } from "../store/MutationNames";
-import { monthView, weekView } from "@/common/constants.ts";
+import {
+  monthView,
+  weekView,
+  listOfYears,
+  monthNames
+} from "@/common/constants.ts";
 
 @Component
 export default class Menu extends Vue {
   // Component properties
-  monthNames: string[] = moment.months();
-  listOfYears: number[] = [...Array(3000).keys()].reverse();
+  private monthNames: string[] = monthNames;
+  private listOfYears: number[] = listOfYears;
 
   private monthView: string = monthView;
   private weekView: string = weekView;

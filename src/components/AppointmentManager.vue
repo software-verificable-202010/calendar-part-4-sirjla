@@ -105,15 +105,20 @@ import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
 import { insertAppointmentMutation } from "../store/MutationNames";
 import { Appointment } from "@/types/Appointment";
+import {
+  minuteOffset,
+  emptyString,
+  startingNumber,
+  listOfYears,
+  monthNames,
+  closeEvent
+} from "@/common/constants";
 
 @Component({})
 export default class AppointmentManager extends Vue {
-  private minuteOffset = 1;
-  private emptyString = "";
-  private startingTimeValue = 0;
-  private listOfYears: number[] = [...Array(3000).keys()].reverse();
-  private monthNames: string[] = moment.months();
-  private closeEvent = "close";
+  private listOfYears: number[] = listOfYears;
+  private monthNames: string[] = monthNames;
+  private closeEvent = closeEvent;
 
   private hours: number[] = [...Array(24).keys()];
   private minutes: number[] = [...Array(60).keys()];
@@ -124,15 +129,15 @@ export default class AppointmentManager extends Vue {
       month: this.$store.state.currentDate.month(),
       year: this.$store.state.currentDate.year()
     }),
-    title: this.emptyString,
-    description: this.emptyString,
+    title: emptyString,
+    description: emptyString,
     startTime: {
-      hour: this.startingTimeValue,
-      minute: this.startingTimeValue
+      hour: startingNumber,
+      minute: startingNumber
     },
     endTime: {
-      hour: this.startingTimeValue,
-      minute: this.minuteOffset
+      hour: startingNumber,
+      minute: minuteOffset
     }
   };
 
@@ -212,7 +217,7 @@ export default class AppointmentManager extends Vue {
     this.appointment.startTime.minute = value;
     // The event has to have atleast 1 minute duration
     if (this.appointment.startTime.hour === this.appointment.endTime.hour) {
-      this.appointment.endTime.minute = value + this.minuteOffset;
+      this.appointment.endTime.minute = value + minuteOffset;
     }
   }
 

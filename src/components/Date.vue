@@ -15,12 +15,15 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import moment from "moment";
 import { Appointment } from "@/types/Appointment";
+import {
+  emptyString,
+  startingNumber,
+  dateComparisonGranularity,
+  momentJsWeekdayNameFormatter
+} from "@/common/constants";
 
-const emptyClass = "";
 const weekendClass = "date-weekend";
-const dateComparisonGranularity = "day";
 const currentDateClass = "date-current";
-const momentJsWeekdayNameFormatter = "dddd";
 const weekdayOrders = ["first", "second", "third", "fourth", "fifth", "sixth"];
 
 @Component
@@ -38,8 +41,8 @@ export default class Date extends Vue {
   private get dateClass(): string[] {
     return [
       `date-${this.isoWeekNumberToOrder()}${this.weekDayName}`,
-      this.isWeekend ? weekendClass : emptyClass,
-      this.isCurrentDate ? currentDateClass : emptyClass
+      this.isWeekend ? weekendClass : emptyString,
+      this.isCurrentDate ? currentDateClass : emptyString
     ];
   }
 
@@ -61,7 +64,7 @@ export default class Date extends Vue {
     let isoWeekdayNumberDifference: number;
     // Fix this magic number
     isoWeekdayNumberDifference = this.date.isoWeek() - this.startingWeekNumber;
-    if (isoWeekdayNumberDifference < 0) {
+    if (isoWeekdayNumberDifference < startingNumber) {
       isoWeekdayNumberDifference =
         isoWeekdayNumberDifference + this.date.isoWeeksInYear();
     }

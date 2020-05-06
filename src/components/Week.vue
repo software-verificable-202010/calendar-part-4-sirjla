@@ -9,7 +9,7 @@
     </div>
     <template v-for="(date, dateIndex) in calendarDates">
       <ScheduleHour
-        v-for="(hour, hourIndex) in Array(24).keys()"
+        v-for="(hour, hourIndex) in hours"
         :key="`date-${dateIndex}-hour-${hourIndex}`"
         :hour="hour"
         :appointments="appointments(date)"
@@ -33,6 +33,10 @@ const momentJsWeekdayNameFormatter = "dddd";
   }
 })
 export default class Week extends Vue {
+  private hoursInDay = 24;
+  private daysInWeek = 7;
+  private hours = Array(this.hoursInDay).keys();
+
   private get getSelectedWeek(): number {
     return this.$store.state.selectedWeek;
   }
@@ -41,7 +45,7 @@ export default class Week extends Vue {
     const baseMoment: moment.Moment = moment().set({
       isoWeek: this.getSelectedWeek
     });
-    return [...Array(7).keys()].map(
+    return [...Array(this.daysInWeek).keys()].map(
       (dateNumber: number): moment.Moment =>
         baseMoment.clone().set({
           date: baseMoment.date() + dateNumber
