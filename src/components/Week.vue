@@ -52,9 +52,10 @@ export default class Week extends Vue {
   }
 
   private get calendarDates(): moment.Moment[] {
+    const mondayDay = 1;
     const baseMoment: moment.Moment = moment().set({
       isoWeek: this.getSelectedWeek,
-      day: 1
+      day: mondayDay
     });
     return [...Array(this.daysInWeek).keys()]
       .map((dateNumber: number): number => +dateNumber)

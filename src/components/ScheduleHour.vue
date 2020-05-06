@@ -57,7 +57,10 @@ export default class ScheduleHour extends Vue {
             return true;
           }
         }
-        if (interval == this.secondInterval) {
+        if (
+          interval == this.secondInterval &&
+          appointment.endTime.hour != this.hour
+        ) {
           return true;
         }
       }
@@ -74,8 +77,9 @@ export default class ScheduleHour extends Vue {
       if (
         this.hour > appointment.startTime.hour &&
         this.hour < appointment.endTime.hour
-      )
+      ) {
         return true;
+      }
       return false;
     });
   }
