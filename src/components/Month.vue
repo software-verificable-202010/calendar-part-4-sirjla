@@ -8,6 +8,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
 import Date from "./Date.vue";
+import { getCalendarDates } from "@/common/methods";
 
 @Component({
   components: {
@@ -23,20 +24,12 @@ export default class Month extends Vue {
     return this.$store.state.selectedYear;
   }
 
-  // Computed methods
   private get calendarDates(): moment.Moment[] {
     const baseMoment: moment.Moment = moment().set({
       year: this.selectedYear,
       month: this.selectedMonth
     });
-    return [...Array(baseMoment.daysInMonth()).keys()]
-      .map((dateNumber: number): number => ++dateNumber)
-      .map(
-        (dateNumber: number): moment.Moment =>
-          baseMoment.clone().set({
-            date: dateNumber
-          })
-      );
+    return getCalendarDates(baseMoment, baseMoment.daysInMonth());
   }
 }
 </script>
