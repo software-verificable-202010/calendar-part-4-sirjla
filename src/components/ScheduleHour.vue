@@ -2,20 +2,18 @@
   <div :class="hourClass">
     <div class="interval interval-first">
       <AppointmentView
-        v-for="(appointment, index) in getAppointmentsByInterval(0)"
+        v-for="(appointment, index) in getAppointmentsByInterval(firstInterval)"
         :key="index"
         :appointment="appointment"
-        :intervalSize="showIntervalMinutes"
-        :interval="0"
       />
     </div>
     <div class="interval interval-second">
       <AppointmentView
-        v-for="(appointment, index) in getAppointmentsByInterval(1)"
+        v-for="(appointment, index) in getAppointmentsByInterval(
+          secondInterval
+        )"
         :key="index"
         :appointment="appointment"
-        :intervalSize="showIntervalMinutes"
-        :interval="1"
       />
     </div>
   </div>
@@ -40,6 +38,8 @@ export default class ScheduleHour extends Vue {
   @Prop() private weekDayName!: string;
 
   private showIntervalMinutes = 30;
+  private firstInterval = 0;
+  private secondInterval = 1;
 
   private get hourAppointments(): Appointment[] {
     return this.appointments.filter(
@@ -50,21 +50,25 @@ export default class ScheduleHour extends Vue {
   }
 
   private getAppointmentsByInterval(interval: number) {
-    return this.appointments.filter(appointment => {
+    return this.appointments.filter((appointment: Appointment) => {
       if (appointment.startTime.hour == this.hour) {
-        if (interval == 0) {
-          if (appointment.startTime.minute <= 30) return true;
+        if (interval == this.firstInterval) {
+          if (appointment.startTime.minute <= this.showIntervalMinutes) {
+            return true;
+          }
         }
-        if (interval == 1) {
+        if (interval == this.secondInterval) {
           return true;
         }
       }
       if (appointment.endTime.hour == this.hour) {
-        if (interval == 0) {
+        if (interval == this.firstInterval) {
           return true;
         }
-        if (interval == 1) {
-          if (appointment.endTime.minute > 30) return true;
+        if (interval == this.secondInterval) {
+          if (appointment.endTime.minute > this.showIntervalMinutes) {
+            return true;
+          }
         }
       }
       if (
