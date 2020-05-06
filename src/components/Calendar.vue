@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar">
+  <div :class="calendarClass">
     <div class="calendar-header">
       <div
         v-for="(weekdayColumn, index) in weekdayHeaderData"
@@ -20,7 +20,7 @@ import moment from "moment";
 import { HeaderData } from "@/types/Calendar";
 import Month from "@/components/Month.vue";
 import Week from "@/components/Week.vue";
-import { monthView, weekView } from "@/common/constants.ts";
+import { monthView, weekView, emptyString } from "@/common/constants.ts";
 
 @Component({
   components: {
@@ -31,6 +31,17 @@ import { monthView, weekView } from "@/common/constants.ts";
 export default class Calendar extends Vue {
   private monthView: string = monthView;
   private weekView: string = weekView;
+  private baseClass = "calendar";
+  private weekClass = "calendar-week";
+
+  private get calendarClass(): string[] {
+    return [
+      this.baseClass,
+      this.$store.state.currentView === this.weekView
+        ? this.weekClass
+        : emptyString
+    ];
+  }
 
   private showView(view: string): boolean {
     return this.$store.state.currentView === view;
@@ -63,6 +74,12 @@ export default class Calendar extends Vue {
   grid-template-areas:
     "header header header header header header header"
     "data data data data data data data";
+  &-week {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      ". header header header header header header header"
+      "data data data data data data data data";
+  }
 }
 .calendar-display {
   grid-area: data;
