@@ -8,6 +8,21 @@ This project is a calendar.
 
 ## Project setup
 
+### Linter
+
+The static code analisis on that were used on this project are:
+
+- [Prettier](https://prettier.io/)
+- [Eslint](https://eslint.org/)
+
+The two tools are configured to work toguether on the command
+
+``` bash
+npm run lint
+```
+
+And use the rules detailed in the file .eslintrc.js
+
 ### Node version
 
 To successfuly run this project, it is necessary to
