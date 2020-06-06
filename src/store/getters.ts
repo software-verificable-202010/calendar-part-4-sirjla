@@ -18,10 +18,15 @@ export const getters = {
   getDateAppointments: (state: RootState) => (
     date: moment.Moment
   ): Appointment[] => {
-    return state.appointments.filter((appointment: Appointment) =>
-      appointment.date.isSame(date, dateComparisonGranularity)
-    ).filter((appointment: Appointment) =>
-    appointment.owner === state.currentUser || appointment.invitees.includes(state.currentUser!)
-  );
+    const currentUser = state.currentUser == undefined ? "" : state.currentUser;
+    return state.appointments
+      .filter((appointment: Appointment) =>
+        appointment.date.isSame(date, dateComparisonGranularity)
+      )
+      .filter(
+        (appointment: Appointment) =>
+          appointment.owner === state.currentUser ||
+          appointment.invitees.includes(currentUser)
+      );
   }
 };

@@ -4,7 +4,9 @@ import storage from "electron-json-storage";
 import { appointmentDB, userDB } from "@/common/constants";
 
 const monthNumberUpperLimit = 12;
-
+// Warning is disabled on the next line due to not being
+// able to control the object type
+// eslint-disable-next-line
 function updateDB(db: string, object: any) {
   storage.set(db, object, function(error) {
     if (error) throw error;
@@ -51,7 +53,7 @@ export const mutations = {
     state.currentUser = undefined;
   },
   setAppointmentToEdit(state: RootState, appointment: Appointment) {
-    if (state.currentUser === appointment.owner){
+    if (state.currentUser === appointment.owner) {
       state.appointmentToEdit = appointment;
     }
   },
@@ -59,7 +61,9 @@ export const mutations = {
     state.appointmentToEdit = undefined;
   },
   deleteAppointment(state: RootState, appointment: Appointment) {
-    state.appointments = state.appointments.filter((app: Appointment) => app !== appointment);
+    state.appointments = state.appointments.filter(
+      (app: Appointment) => app !== appointment
+    );
     updateDB(appointmentDB, state.appointments);
   }
 };

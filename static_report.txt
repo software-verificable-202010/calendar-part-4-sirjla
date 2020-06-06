@@ -1,0 +1,5 @@
+
+> calendar@0.1.0 lint /Users/joseluisassadi/Documents/Universidad/calidad/proyecto
+> vue-cli-service lint
+
+ DONE  No lint errors found!

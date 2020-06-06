@@ -8,7 +8,7 @@ This project is a calendar.
 
 ## Project setup
 
-### Linter
+### Static Code Analisys
 
 The static code analisis on that were used on this project are:
 
@@ -22,6 +22,8 @@ npm run lint
 ```
 
 And use the rules detailed in the file .eslintrc.js
+
+The output of this tool is sent to the console, but is also available on the file **static_report.txt**
 
 ### Node version
 
