@@ -40,14 +40,6 @@ export default class ScheduleHour extends Vue {
   private firstInterval = 0;
   private secondInterval = 1;
 
-  private get hourAppointments(): Appointment[] {
-    return this.appointments.filter(
-      appointment =>
-        this.hour >= appointment.startTime.hour &&
-        this.hour <= appointment.endTime.hour
-    );
-  }
-
   private getAppointmentsByInterval(interval: number) {
     return this.appointments.filter((appointment: Appointment) => {
       if (appointment.startTime.hour == this.hour) {
