@@ -43,6 +43,9 @@ export default class App extends Vue {
               (appointment: Appointment) => appointment.owner != undefined
             )
             .map((appointment: Appointment) => {
+              if (appointment.invitees == undefined) {
+                appointment.invitees = [];
+              }
               appointment.date = moment(appointment.date);
               return appointment;
             })

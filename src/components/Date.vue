@@ -5,6 +5,7 @@
       class="appointment"
       v-for="(appointment, index) in appointments"
       :key="index"
+      @click="editAppointment(appointment)"
     >
       {{ appointment.title }}
     </li>
@@ -21,6 +22,10 @@ import {
   dateComparisonGranularity,
   momentJsWeekdayNameFormatter
 } from "@/common/constants";
+import {
+  setAppointmentToEditMutation,
+  changeShowAppointmentMutation
+} from "../store/MutationNames";
 
 const weekendClass = "date-weekend";
 const currentDateClass = "date-current";
@@ -30,6 +35,13 @@ const weekdayOrders = ["first", "second", "third", "fourth", "fifth", "sixth"];
 export default class Date extends Vue {
   // Component inherited properties
   @Prop() private date!: moment.Moment;
+
+  private editAppointment(appointment: Appointment) {
+    this.$store.commit(setAppointmentToEditMutation, appointment);
+    if (appointment.owner === this.$store.state.currentUser) {
+      this.$store.commit(changeShowAppointmentMutation, true);
+    }
+  }
 
   // Component computed properties
   private get dateNumber(): number {

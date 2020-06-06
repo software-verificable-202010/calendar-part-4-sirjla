@@ -11,6 +11,7 @@ interface RootState {
   appointments: Appointment[];
   allUsers: string[];
   currentUser: string | undefined;
+  appointmentToEdit: Appointment | undefined;
 }
 
 export { RootState };

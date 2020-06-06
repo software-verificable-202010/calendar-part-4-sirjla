@@ -10,5 +10,6 @@ export const state = {
   showAppointment: false,
   appointments: [],
   allUsers: [],
-  currentUser: undefined
+  currentUser: undefined,
+  appointmentToEdit: undefined
 };

@@ -5,6 +5,12 @@ import { appointmentDB, userDB } from "@/common/constants";
 
 const monthNumberUpperLimit = 12;
 
+function updateDB(db: string, object: any) {
+  storage.set(db, object, function(error) {
+    if (error) throw error;
+  });
+}
+
 export const mutations = {
   selectMonth(state: RootState, month: number) {
     state.selectedMonth = month % monthNumberUpperLimit;
@@ -23,20 +29,17 @@ export const mutations = {
   },
   insertAppointment(state: RootState, appointment: Appointment) {
     state.appointments.push(appointment);
-
-    storage.set(appointmentDB, state.appointments, function(error) {
-      if (error) throw error;
-    });
+    updateDB(appointmentDB, state.appointments);
+  },
+  updateAppointmentDB(state: RootState) {
+    updateDB(appointmentDB, state.appointments);
   },
   loadAppoinments(state: RootState, appointments: Appointment[]) {
     state.appointments = appointments;
   },
   insertUser(state: RootState, user: string) {
     state.allUsers.push(user);
-
-    storage.set(userDB, state.allUsers, function(error) {
-      if (error) throw error;
-    });
+    updateDB(userDB, state.allUsers);
   },
   loadUsers(state: RootState, users: string[]) {
     state.allUsers = users;
@@ -46,5 +49,17 @@ export const mutations = {
   },
   unsetCurrentUser(state: RootState) {
     state.currentUser = undefined;
+  },
+  setAppointmentToEdit(state: RootState, appointment: Appointment) {
+    if (state.currentUser === appointment.owner){
+      state.appointmentToEdit = appointment;
+    }
+  },
+  unsetAppointmentToEdit(state: RootState) {
+    state.appointmentToEdit = undefined;
+  },
+  deleteAppointment(state: RootState, appointment: Appointment) {
+    state.appointments = state.appointments.filter((app: Appointment) => app !== appointment);
+    updateDB(appointmentDB, state.appointments);
   }
 };

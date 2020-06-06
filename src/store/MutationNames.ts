@@ -9,6 +9,10 @@ const loadUsersMutation = "loadUsers";
 const insertUserMutation = "insertUser";
 const setCurrentUserMutation = "setCurrentUser";
 const unsetCurrentUserMutation = "unsetCurrentUser";
+const setAppointmentToEditMutation = "setAppointmentToEdit";
+const unsetAppointmentToEditMutation = "unsetAppointmentToEdit";
+const updateAppointmentDBMutation = "updateAppointmentDB";
+const deleteAppointmentMutation = "deleteAppointment";
 
 export {
   selectMonthMutation,
@@ -21,5 +25,9 @@ export {
   loadUsersMutation,
   insertUserMutation,
   setCurrentUserMutation,
-  unsetCurrentUserMutation
+  unsetCurrentUserMutation,
+  setAppointmentToEditMutation,
+  unsetAppointmentToEditMutation,
+  updateAppointmentDBMutation,
+  deleteAppointmentMutation
 };

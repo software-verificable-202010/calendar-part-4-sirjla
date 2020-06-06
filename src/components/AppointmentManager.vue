@@ -83,6 +83,8 @@
                 >{{ minute }}</option
               >
             </select>
+            <br />
+            <label>Invitees:</label>
             <div v-for="(user, index) in posibleInvitees" :key="index">
               <input
                 type="checkbox"
@@ -95,11 +97,18 @@
           </div>
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="$emit(closeEvent)">
+              <button class="modal-default-button" @click="cancelEdition()">
                 Cancel
               </button>
               <button class="modal-default-button" @click="saveAppointment()">
                 Save
+              </button>
+              <button
+                v-if="editing"
+                class="modal-default-button"
+                @click="deleteAppointment()"
+              >
+                delete
               </button>
             </slot>
           </div>
@@ -112,7 +121,12 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
-import { insertAppointmentMutation } from "../store/MutationNames";
+import {
+  insertAppointmentMutation,
+  updateAppointmentDBMutation,
+  deleteAppointmentMutation,
+  unsetAppointmentToEditMutation
+} from "../store/MutationNames";
 import { Appointment } from "@/types/Appointment";
 import {
   minuteOffset,
@@ -151,6 +165,16 @@ export default class AppointmentManager extends Vue {
     owner: this.$store.state.currentUser,
     invitees: []
   };
+
+  private get editing() {
+    return this.$store.state.appointmentToEdit != undefined;
+  }
+
+  mounted() {
+    if (this.editing) {
+      this.appointment = this.$store.state.appointmentToEdit;
+    }
+  }
 
   private get invitees(): string[] {
     return this.appointment.invitees;
@@ -260,9 +284,27 @@ export default class AppointmentManager extends Vue {
     this.appointment.endTime.minute = value;
   }
 
+  private deleteAppointment(): void {
+    this.$store.commit(deleteAppointmentMutation, this.appointment);
+    this.$store.commit(unsetAppointmentToEditMutation);
+    this.$emit(this.closeEvent);
+  }
+
   private saveAppointment(): void {
     if (this.appointment.title === emptyString) return;
-    this.$store.commit(insertAppointmentMutation, this.appointment);
+    if (this.editing) {
+      this.$store.commit(updateAppointmentDBMutation);
+      this.$store.commit(unsetAppointmentToEditMutation);
+    } else {
+      this.$store.commit(insertAppointmentMutation, this.appointment);
+    }
+    this.$emit(this.closeEvent);
+  }
+
+  private cancelEdition(): void {
+    if (this.editing) {
+      this.$store.commit(unsetAppointmentToEditMutation);
+    }
     this.$emit(this.closeEvent);
   }
 }
