@@ -21,7 +21,7 @@ export const getters = {
     return state.appointments.filter((appointment: Appointment) =>
       appointment.date.isSame(date, dateComparisonGranularity)
     ).filter((appointment: Appointment) =>
-    appointment.owner === state.currentUser
+    appointment.owner === state.currentUser || appointment.invitees.includes(state.currentUser!)
   );
   }
 };

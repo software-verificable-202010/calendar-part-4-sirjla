@@ -83,6 +83,15 @@
                 >{{ minute }}</option
               >
             </select>
+            <div v-for="(user, index) in posibleInvitees" :key="index">
+              <input
+                type="checkbox"
+                :id="user"
+                :value="user"
+                v-model="invitees"
+              />
+              <label :for="user">{{ user }}</label>
+            </div>
           </div>
           <div class="modal-footer">
             <slot name="footer">
@@ -139,8 +148,23 @@ export default class AppointmentManager extends Vue {
       hour: startingNumber,
       minute: minuteOffset
     },
-    owner: this.$store.state.currentUser
+    owner: this.$store.state.currentUser,
+    invitees: []
   };
+
+  private get invitees(): string[] {
+    return this.appointment.invitees;
+  }
+
+  private set invitees(value: string[]) {
+    this.appointment.invitees = value;
+  }
+
+  private get posibleInvitees(): string[] {
+    return this.$store.state.allUsers.filter(
+      (user: string) => user !== this.appointment.owner
+    );
+  }
 
   get endHours(): number[] {
     return this.hours.filter(
