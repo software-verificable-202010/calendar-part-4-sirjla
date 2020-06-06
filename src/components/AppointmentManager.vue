@@ -237,6 +237,7 @@ export default class AppointmentManager extends Vue {
   }
 
   private saveAppointment(): void {
+    if (this.appointment.title === emptyString) return;
     this.$store.commit(insertAppointmentMutation, this.appointment);
     this.$emit(this.closeEvent);
   }
