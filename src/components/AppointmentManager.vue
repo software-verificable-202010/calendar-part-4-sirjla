@@ -138,7 +138,8 @@ export default class AppointmentManager extends Vue {
     endTime: {
       hour: startingNumber,
       minute: minuteOffset
-    }
+    },
+    owner: this.$store.state.currentUser
   };
 
   get endHours(): number[] {

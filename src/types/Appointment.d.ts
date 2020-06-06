@@ -11,6 +11,7 @@ interface Appointment {
   description: string;
   startTime: AppointmentTime;
   endTime: AppointmentTime;
+  owner: string;
 }
 
 export { Appointment };

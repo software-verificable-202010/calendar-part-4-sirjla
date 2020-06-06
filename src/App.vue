@@ -38,10 +38,14 @@ export default class App extends Vue {
       if (data !== {}) {
         this.$store.commit(
           loadAppoinmentsMutation,
-          JSON.parse(JSON.stringify(data)).map((appointment: Appointment) => {
-            appointment.date = moment(appointment.date);
-            return appointment;
-          })
+          JSON.parse(JSON.stringify(data))
+            .filter(
+              (appointment: Appointment) => appointment.owner != undefined
+            )
+            .map((appointment: Appointment) => {
+              appointment.date = moment(appointment.date);
+              return appointment;
+            })
         );
       }
     });
