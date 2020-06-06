@@ -20,6 +20,8 @@ export const getters = {
   ): Appointment[] => {
     return state.appointments.filter((appointment: Appointment) =>
       appointment.date.isSame(date, dateComparisonGranularity)
-    );
+    ).filter((appointment: Appointment) =>
+    appointment.owner === state.currentUser
+  );
   }
 };
