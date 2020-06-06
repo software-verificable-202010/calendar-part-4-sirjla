@@ -10,7 +10,7 @@
           </div>
           <div class="modal-body">
             <label>Title:</label>
-            <input type="text" v-model="title" placeholder="Title" />
+            <input type="text" v-model="title" placeholder="Title" required />
             <br />
             <label>Description:</label>
             <textarea
