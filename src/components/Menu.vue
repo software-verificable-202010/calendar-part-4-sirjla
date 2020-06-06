@@ -22,6 +22,7 @@
     <button v-on:click="changeWeek(-1)">Prev Week</button>
     <button v-on:click="changeWeek(1)">Next Week</button>
     <button v-on:click="showAppointment()">Create Appointment</button>
+    <button v-on:click="logOut()">Log Out</button>
   </div>
 </template>
 
@@ -32,7 +33,8 @@ import {
   selectYearMutation,
   changeViewMutation,
   changeWeekMutation,
-  changeShowAppointmentMutation
+  changeShowAppointmentMutation,
+  unsetCurrentUserMutation
 } from "../store/MutationNames";
 import {
   monthView,
@@ -77,6 +79,10 @@ export default class Menu extends Vue {
 
   private showAppointment(): void {
     this.$store.commit(changeShowAppointmentMutation, true);
+  }
+
+  private logOut(): void {
+    this.$store.commit(unsetCurrentUserMutation);
   }
 }
 </script>

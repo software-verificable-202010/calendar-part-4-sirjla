@@ -12,6 +12,7 @@ const closeEvent = "close";
 const dateComparisonGranularity = "day";
 const momentJsWeekdayNameFormatter = "dddd";
 const appointmentDB = "appointments";
+const userDB = "users";
 
 export {
   monthView,
@@ -24,5 +25,6 @@ export {
   closeEvent,
   dateComparisonGranularity,
   momentJsWeekdayNameFormatter,
-  appointmentDB
+  appointmentDB,
+  userDB
 };

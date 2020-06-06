@@ -21,7 +21,9 @@ describe("Store Getters", () => {
       currentDate: moment(),
       currentView: monthView,
       showAppointment: false,
-      appointments: []
+      appointments: [],
+      allUsers: [],
+      currentUser: undefined
     };
   });
 

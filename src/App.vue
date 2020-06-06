@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <AppointmentManager v-if="showAppointment" @close="hideAppointment()" />
-    <Calendar id="calendar" />
-    <Menu id="menu" />
+    <Calendar v-if="loggedIn" id="calendar" />
+    <Menu v-if="loggedIn" id="menu" />
+    <LogIn v-if="!loggedIn" />
   </div>
 </template>
 
@@ -13,18 +14,21 @@ import Menu from "@/components/Menu.vue";
 import AppointmentManager from "@/components/AppointmentManager.vue";
 import {
   changeShowAppointmentMutation,
-  loadAppoinmentsMutation
+  loadAppoinmentsMutation,
+  loadUsersMutation
 } from "@/store/MutationNames";
 import storage from "electron-json-storage";
 import { Appointment } from "@/types/Appointment";
 import moment from "moment";
-import { appointmentDB } from "@/common/constants";
+import { appointmentDB, userDB } from "@/common/constants";
+import LogIn from "@/components/LogIn.vue";
 
 @Component({
   components: {
     Calendar,
     Menu,
-    AppointmentManager
+    AppointmentManager,
+    LogIn
   }
 })
 export default class App extends Vue {
@@ -43,8 +47,22 @@ export default class App extends Vue {
     });
   }
 
+  private loadUsers(): void {
+    storage.get(userDB, (error, data) => {
+      if (error) throw error;
+      if (data !== {}) {
+        this.$store.commit(loadUsersMutation, JSON.parse(JSON.stringify(data)));
+      }
+    });
+  }
+
   mounted() {
     this.loadAppointments();
+    this.loadUsers();
+  }
+
+  private get loggedIn(): boolean {
+    return this.$store.state.currentUser != undefined;
   }
 
   private get showAppointment(): boolean {

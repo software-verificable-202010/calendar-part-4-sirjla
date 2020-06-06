@@ -9,6 +9,8 @@ interface RootState {
   currentView: string;
   showAppointment: boolean;
   appointments: Appointment[];
+  allUsers: string[];
+  currentUser: string | undefined;
 }
 
 export { RootState };

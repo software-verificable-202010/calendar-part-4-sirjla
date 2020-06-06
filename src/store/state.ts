@@ -8,5 +8,7 @@ export const state = {
   currentDate: moment(),
   currentView: monthView,
   showAppointment: false,
-  appointments: []
+  appointments: [],
+  allUsers: [],
+  currentUser: undefined
 };
