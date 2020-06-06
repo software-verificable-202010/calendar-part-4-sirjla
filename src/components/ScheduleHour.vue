@@ -23,7 +23,6 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Appointment } from "@/types/Appointment";
 import AppointmentView from "@/components/AppointmentView.vue";
-//import moment from "moment";
 
 const hourClass = "hour";
 

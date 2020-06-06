@@ -40,7 +40,7 @@ export default class Date extends Vue {
   }
   private get dateClass(): string[] {
     return [
-      `date-${this.isoWeekNumberToOrder()}${this.weekDayName}`,
+      `date-${this.transformIsoWeekNumberToOrder()}${this.weekDayName}`,
       this.isWeekend ? weekendClass : emptyString,
       this.isCurrentDate ? currentDateClass : emptyString
     ];
@@ -60,9 +60,8 @@ export default class Date extends Vue {
   private get weekDayName(): string {
     return this.date.format(momentJsWeekdayNameFormatter);
   }
-  private isoWeekNumberToOrder(): string {
+  private transformIsoWeekNumberToOrder(): string {
     let isoWeekdayNumberDifference: number;
-    // Fix this magic number
     isoWeekdayNumberDifference = this.date.isoWeek() - this.startingWeekNumber;
     if (isoWeekdayNumberDifference < startingNumber) {
       isoWeekdayNumberDifference =

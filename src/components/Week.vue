@@ -16,8 +16,8 @@
         v-for="(hour, hourIndex) in hours"
         :key="`date-${dateIndex}-hour-${hourIndex}`"
         :hour="hour"
-        :appointments="appointments(date)"
-        :weekDayName="weekDayName(date)"
+        :appointments="getAppointments(date)"
+        :weekDayName="getWeekDayName(date)"
       />
     </template>
   </div>
@@ -67,11 +67,11 @@ export default class Week extends Vue {
       );
   }
 
-  private appointments(date: moment.Moment): Appointment[] {
+  private getAppointments(date: moment.Moment): Appointment[] {
     return this.$store.getters.getDateAppointments(date);
   }
 
-  private weekDayName(date: moment.Moment): string {
+  private getWeekDayName(date: moment.Moment): string {
     return date.format(momentJsWeekdayNameFormatter);
   }
 }
