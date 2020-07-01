@@ -1,0 +1,29 @@
+
+> calendar@0.1.0 test:unit /Users/joseluisassadi/Documents/Universidad/calidad/calendar-part-4-sirjla
+> jest
+
+-------------------------|---------|----------|---------|---------|----------------------
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
+-------------------------|---------|----------|---------|---------|----------------------
+All files                |   30.94 |    14.71 |   18.92 |   31.83 |                      
+ src                     |       0 |        0 |       0 |       0 |                      
+  App.vue                |       0 |        0 |       0 |       0 | 11-80                
+ src/common              |     100 |      100 |     100 |     100 |                      
+  constants.ts           |     100 |      100 |     100 |     100 |                      
+ src/components          |   11.23 |        8 |   11.39 |    11.6 |                      
+  AppointmentManager.vue |       0 |        0 |       0 |       0 | 122-308              
+  AppointmentView.vue    |       0 |        0 |       0 |       0 | 8-22                 
+  Calendar.vue           |       0 |        0 |       0 |       0 | 18-50                
+  Date.vue               |   80.77 |       50 |      90 |   80.77 | 40-42,79,85          
+  LogIn.vue              |       0 |        0 |       0 |       0 | 11-36                
+  Menu.vue               |       0 |      100 |       0 |       0 | 30-85                
+  Month.vue              |       0 |      100 |       0 |       0 | 8-31                 
+  ScheduleHour.vue       |       0 |        0 |       0 |       0 | 23-79                
+  Week.vue               |       0 |      100 |       0 |       0 | 27-75                
+ src/store               |   66.67 |       75 |   52.17 |   67.53 |                      
+  MutationNames.ts       |     100 |      100 |     100 |     100 |                      
+  getters.ts             |     100 |      100 |     100 |     100 |                      
+  index.ts               |       0 |      100 |     100 |       0 | 1-18                 
+  mutations.ts           |   44.44 |       50 |   38.89 |   46.15 | 11-12,27,33-47,61-67 
+  state.ts               |       0 |      100 |     100 |       0 | 1-4                  
+-------------------------|---------|----------|---------|---------|----------------------

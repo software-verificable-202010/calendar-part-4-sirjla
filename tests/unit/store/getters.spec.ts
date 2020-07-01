@@ -1,9 +1,8 @@
-import { expect } from "chai";
 import { getters } from "@/store/getters";
-import moment from "moment";
 import MockDate from "mockdate";
 import { RootState } from "@/types/store";
 import { monthView } from "@/common/constants.ts";
+import moment from "moment";
 
 describe("Store Getters", () => {
   const originalMonth = 3;
@@ -23,12 +22,49 @@ describe("Store Getters", () => {
       showAppointment: false,
       appointments: [],
       allUsers: [],
-      currentUser: undefined
+      currentUser: undefined,
+      appointmentToEdit: undefined
     };
   });
 
   it("Iso week is obtained correctly", () => {
     const isoWeek = getters.selecteddMonthStartingWeekNumber(state);
-    expect(isoWeek).to.equal(moment().isoWeek());
+    expect(isoWeek).toEqual(moment().isoWeek());
+  });
+
+  it("Empty Appointments are obtained correctly", () => {
+    const appointments = getters.getDateAppointments(state)(moment());
+    expect(appointments).toHaveLength(0);
+  });
+
+  it("Appointments are obtained correctly", () => {
+    const user = 'user';
+    const user2 = 'user2';
+    const originalAppointments = [
+      {
+        date: moment(),
+        title: 'appointment 1',
+        description: '',
+        startTime: { hour: 10, minute: 30 },
+        endTime: { hour: 11, minute: 30 },
+        owner: user,
+        invitees: []
+      },
+      {
+        date: moment(),
+        title: 'appointment 2',
+        description: '',
+        startTime: { hour: 10, minute: 30 },
+        endTime: { hour: 11, minute: 30 },
+        owner: user2,
+        invitees: []
+      }
+    ]
+    
+    state.currentUser = user;
+    state.appointments = originalAppointments;
+    
+    const appointments = getters.getDateAppointments(state)(moment());
+    expect(appointments).toHaveLength(1);
   });
 });

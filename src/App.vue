@@ -32,6 +32,11 @@ import LogIn from "@/components/LogIn.vue";
   }
 })
 export default class App extends Vue {
+  mounted() {
+    this.loadAppointments();
+    this.loadUsers();
+  }
+
   private loadAppointments(): void {
     storage.get(appointmentDB, (error, data) => {
       if (error) throw error;
@@ -61,11 +66,6 @@ export default class App extends Vue {
         this.$store.commit(loadUsersMutation, JSON.parse(JSON.stringify(data)));
       }
     });
-  }
-
-  mounted() {
-    this.loadAppointments();
-    this.loadUsers();
   }
 
   private get loggedIn(): boolean {
