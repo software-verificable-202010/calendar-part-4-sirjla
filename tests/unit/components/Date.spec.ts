@@ -2,14 +2,12 @@ import { createLocalVue, shallowMount } from "@vue/test-utils";
 import Vuex, { Store } from "vuex";
 import Date from "@/components/Date.vue";
 import MockDate from "mockdate";
-import moment, { weekdays } from "moment";
+import moment from "moment";
 import { mutations } from "@/store/mutations";
 import { getters } from "@/store/getters";
 import { RootState } from "@/types/store";
 import { monthView } from "@/common/constants.ts";
-import {
-  momentJsWeekdayNameFormatter
-} from "@/common/constants";
+import { momentJsWeekdayNameFormatter } from "@/common/constants";
 
 const mockDateTime = "2020-04-01T12:00:00.000";
 
@@ -61,6 +59,7 @@ describe("Date.vue", () => {
     });
 
     it("Date number is properly deducted", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const wrapper: any = shallowMount(Date, {
         store,
         localVue,
@@ -72,6 +71,7 @@ describe("Date.vue", () => {
     });
 
     it("Iso week number is properly deducted", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const wrapper: any = shallowMount(Date, {
         store,
         localVue,
@@ -83,6 +83,7 @@ describe("Date.vue", () => {
     });
 
     it("Weekday name is obtained properly", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const wrapper: any = shallowMount(Date, {
         store,
         localVue,
@@ -90,11 +91,21 @@ describe("Date.vue", () => {
           date: moment()
         }
       });
-      expect(wrapper.vm.weekDayName).toEqual(moment().format(momentJsWeekdayNameFormatter));
+      expect(wrapper.vm.weekDayName).toEqual(
+        moment().format(momentJsWeekdayNameFormatter)
+      );
     });
 
     it("Generates order correctly", () => {
-      const weekdayOrders = ["first", "second", "third", "fourth", "fifth", "sixth"];
+      const weekdayOrders = [
+        "first",
+        "second",
+        "third",
+        "fourth",
+        "fifth",
+        "sixth"
+      ];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const wrapper: any = shallowMount(Date, {
         store,
         localVue,
@@ -105,7 +116,9 @@ describe("Date.vue", () => {
 
       const isoWeekdayNumberDifference = 0;
 
-      expect(wrapper.vm.transformIsoWeekNumberToOrder()).toEqual(weekdayOrders[isoWeekdayNumberDifference]);
+      expect(wrapper.vm.transformIsoWeekNumberToOrder()).toEqual(
+        weekdayOrders[isoWeekdayNumberDifference]
+      );
     });
   });
 });

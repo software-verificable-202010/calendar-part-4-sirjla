@@ -8,6 +8,14 @@ This project is a calendar.
 
 ## Project setup
 
+### Tests
+
+``` bash
+npm run test:unit
+```
+
+An output of the last run test coverage can be fount on the file `coverage.txt`, if more in depth analisis is needed, go to `coverage/Icov-report/index.html`, open it on the browser, and you can see a more in depth report.
+
 ### Static Code Analisys
 
 The static code analisis on that were used on this project are:
@@ -65,18 +73,6 @@ This will create a folder called **dist_electron**, inside it, one can find the 
 ---- .....
 -- .....
 -- node_modules
-```
-
-### Run your unit tests
-
-``` bash
-npm run test:unit
-```
-
-### Run your end-to-end tests
-
-``` bash
-npm run test:e2e
 ```
 
 ### Lints and fixes files

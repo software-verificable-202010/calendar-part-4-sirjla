@@ -38,13 +38,13 @@ describe("Store Getters", () => {
   });
 
   it("Appointments are obtained correctly", () => {
-    const user = 'user';
-    const user2 = 'user2';
+    const user = "user";
+    const user2 = "user2";
     const originalAppointments = [
       {
         date: moment(),
-        title: 'appointment 1',
-        description: '',
+        title: "appointment 1",
+        description: "",
         startTime: { hour: 10, minute: 30 },
         endTime: { hour: 11, minute: 30 },
         owner: user,
@@ -52,18 +52,18 @@ describe("Store Getters", () => {
       },
       {
         date: moment(),
-        title: 'appointment 2',
-        description: '',
+        title: "appointment 2",
+        description: "",
         startTime: { hour: 10, minute: 30 },
         endTime: { hour: 11, minute: 30 },
         owner: user2,
         invitees: []
       }
-    ]
-    
+    ];
+
     state.currentUser = user;
     state.appointments = originalAppointments;
-    
+
     const appointments = getters.getDateAppointments(state)(moment());
     expect(appointments).toHaveLength(1);
   });

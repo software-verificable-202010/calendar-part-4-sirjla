@@ -3,7 +3,15 @@ import { RootState } from "@/types/store";
 import moment from "moment";
 import { monthView } from "@/common/constants.ts";
 
-const { selectMonth, selectYear, changeView, changeShowAppointment, setCurrentUser, unsetCurrentUser, setAppointmentToEdit } = mutations;
+const {
+  selectMonth,
+  selectYear,
+  changeView,
+  changeShowAppointment,
+  setCurrentUser,
+  unsetCurrentUser,
+  setAppointmentToEdit
+} = mutations;
 
 describe("Store Mutations", () => {
   const originalMonth = 3;
@@ -53,7 +61,7 @@ describe("Store Mutations", () => {
   });
 
   it("View is updated correctly", () => {
-    const viewName = 'week';
+    const viewName = "week";
     expect(state.currentView).not.toEqual(viewName);
     changeView(state, viewName);
     expect(state.currentView).toEqual(viewName);
@@ -70,14 +78,14 @@ describe("Store Mutations", () => {
   });
 
   it("User is correctly set", () => {
-    const user = 'user';
+    const user = "user";
     expect(state.currentUser).not.toEqual(user);
     setCurrentUser(state, user);
     expect(state.currentUser).toEqual(user);
   });
 
   it("User is correctly unset", () => {
-    const user = 'user';
+    const user = "user";
     setCurrentUser(state, user);
     expect(state.currentUser).toEqual(user);
     unsetCurrentUser(state);
@@ -85,16 +93,16 @@ describe("Store Mutations", () => {
   });
 
   it("Does not set appointment of other user to edit", () => {
-    const user = 'user';
+    const user = "user";
     const appointment = {
       date: moment(),
-      title: 'appointment 2',
-      description: '',
+      title: "appointment 2",
+      description: "",
       startTime: { hour: 10, minute: 30 },
       endTime: { hour: 11, minute: 30 },
       owner: user,
       invitees: []
-    }
+    };
     expect(state.currentUser).not.toEqual(user);
     setAppointmentToEdit(state, appointment);
 
@@ -102,20 +110,19 @@ describe("Store Mutations", () => {
   });
 
   it("Set appointment of user to edit", () => {
-    const user = 'user';
+    const user = "user";
     const appointment = {
       date: moment(),
-      title: 'appointment 2',
-      description: '',
+      title: "appointment 2",
+      description: "",
       startTime: { hour: 10, minute: 30 },
       endTime: { hour: 11, minute: 30 },
       owner: user,
       invitees: []
-    }
+    };
     setCurrentUser(state, user);
     expect(state.currentUser).toEqual(user);
     setAppointmentToEdit(state, appointment);
     expect(state.appointmentToEdit).toEqual(appointment);
   });
-
 });
